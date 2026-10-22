@@ -1,0 +1,14 @@
+function expandedForm(num) {
+   let digs = String(num).split('');   
+    let res = [];                      
+    for (let i = 0; i < digs.length; i++) {
+        let digit = digs[i];
+        if (digit === '0') continue;
+        let zeros = digs.length - 1 - i;
+        res.push(digit + '0'.repeat(zeros));
+    }
+
+    return res.join(' + ');
+}
+console.log(expandedForm(12));
+console.log(expandedForm(10203));
