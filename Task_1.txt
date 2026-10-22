@@ -1,0 +1,18 @@
+function hasTwoCubeSums(n) {
+	  let count = 0; 
+
+    for (let a = 1; a ** 3 < n; a++) {
+        let rest = n - a ** 3;         
+        let b = Math.round(Math.cbrt(rest)); 
+
+       
+        if (b >= a && b ** 3 === rest) {
+            count++;
+            if (count === 2) return true; 
+        }
+    }
+
+    return false;
+}
+console.log(hasTwoCubeSums(13832)); 
+console.log(hasTwoCubeSums(100));   
