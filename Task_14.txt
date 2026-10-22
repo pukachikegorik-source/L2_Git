@@ -1,0 +1,12 @@
+function isCircleSorted( arr ){
+  let drops = 0;
+  for (let i = 0; i < arr.length; i++){
+    let next = arr[(i + 1) % arr.length];
+    if (arr[i] > next){
+      drops++;
+    }
+  }
+  return drops <= 1;
+}
+console.log(isCircleSorted([1, 2, 3, 4, 1]));     
+console.log(isCircleSorted([3, 1, 2, 5, 4]))
