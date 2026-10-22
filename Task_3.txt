@@ -1,0 +1,19 @@
+finction whatCentury (year) {
+let n = Math.ceil(Number(year) / 100);
+
+    let last_two = n % 100;       
+    let last = n % 10;   
+
+    let suf;
+    if (last_two >= 11 && last_two <= 13) {
+        suf = 'th';       
+    } else if (last === 1) {
+        suf = 'st';       
+    } else if (last === 2) {
+        suf = 'nd';      
+    } else if (last === 3) {
+        suf = 'rd';
+    } else { suf = 'th'; }
+
+    return n + suf;
+}
