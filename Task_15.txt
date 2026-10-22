@@ -1,0 +1,42 @@
+function howManyTimes(time1, time2) {
+    function parse(str) {
+        let [dp, tp] = str.split(' ');
+        let [y, mo, d] = dp.split('-').map(Number);
+        let [h, mi, s] = tp.split(':').map(Number);
+        return new Date(y, mo - 1, d, h, mi, s).getTime();
+    }
+
+    let start = parse(time1);
+    let end = parse(time2);
+    let count = 0;
+
+    for (let i = start; i < end; i += 1000) {
+        let d = new Date(i);
+        let h = d.getHours() % 12 || 12;
+        let m = d.getMinutes();
+        let s = d.getSeconds();
+
+        let halfStart, duration;
+        if (m < 30) {
+            halfStart = i - m * 60000 - s * 1000;         // hh:00:00
+            duration = h;
+        } else {
+            halfStart = i - (m - 30) * 60000 - s * 1000;  // hh:30:00
+            duration = 1;
+        }
+
+        let elapsed = (i - halfStart) / 1000;
+        if (elapsed < duration) {
+            count += 1;
+        }
+    }
+
+    return count;
+}
+
+console.log(howManyTimes('2016-08-14 12:00:00', '2016-08-14 12:00:01'));  
+console.log(howManyTimes('2016-08-14 12:00:00', '2016-08-14 12:00:11'));  
+console.log(howManyTimes('2016-08-14 12:00:00', '2016-08-14 12:01:00'));  
+console.log(howManyTimes('2016-08-14 12:00:00', '2016-08-14 12:30:00'));  
+console.log(howManyTimes('2016-08-14 12:00:00', '2016-08-14 12:31:00')); 
+console.log(howManyTimes('2016-08-14 12:00:00', '2016-08-14 13:01:00'));  
