@@ -1,0 +1,13 @@
+function ipv4Parser(ip, mask){
+  let ip_part = ip.split('.').map(Number);
+  let mask_part = mask.split('.').map(Number);
+  let net = [];
+  let host = [];
+  
+  for (let i = 0; i<4;i++){
+    net.push(ip_part[i] & mask_part[i]);
+    host.push(ip_part[i] & (~mask_part[i] & 255));
+  }
+  return [net.join('.'), host.join('.')];
+}
+console.log(ipv4Parser('192.168.1.10', '255.255.255.0'))
