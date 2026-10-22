@@ -1,0 +1,10 @@
+function longest(arr, n) {
+  return arr
+    .map((str, i) => ({ str, i })).sort((a, b) =>
+      b.str.length - a.str.length ||                         
+      a.i - b.i                                              
+    )
+    [n - 1].str;
+}
+const arr = ['Hello', 'World', 'Codewars', 'Kansas'];
+console.log(longest(arr, 4));
